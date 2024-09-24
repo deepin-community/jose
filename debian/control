@@ -1,15 +1,57 @@
-Source: template-repository
-Section: unknown
+Source: jose
+Maintainer: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+Homepage: https://github.com/latchset/jose
+Standards-Version: 4.6.2
+Vcs-Browser: https://git.in-ulm.de/cbiedl/jose
+Vcs-Git: https://git.in-ulm.de/cbiedl/jose.git
+Build-Depends: debhelper-compat (= 13),
+    asciidoctor,
+    jq,
+    libjansson-dev (>= 2.10),
+    libssl-dev (>= 1.0.2),
+    meson,
+    pkgconf,
+    zlib1g-dev,
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Rules-Requires-Root: no
+Section: net
 
-Package: template-repository
+Package: jose
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends: ${misc:Depends}, ${shlibs:Depends},
+Description: C implementation of Javascript Object Signing and Encryption standards
+ José is a C-language implementation of the Javascript Object Signing
+ and Encryption standards. Specifically, José aims towards implementing
+ the following standards:
+ .
+   RFC 7515 - JSON Web Signature (JWS)
+   RFC 7516 - JSON Web Encryption (JWE)
+   RFC 7517 - JSON Web Key (JWK)
+   RFC 7518 - JSON Web Algorithms (JWA)
+   RFC 7519 - JSON Web Token (JWT)
+   RFC 7520 - Examples of ... JOSE
+   RFC 7638 - JSON Web Key (JWK) Thumbprint
+
+Package: libjose0
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+Section: libs
+Multi-Arch: same
+Description: Javascript Object Signing and Encryption (José) - library
+ This package provides the shared library for José, a C-language
+ implementation of the Javascript Object Signing and Encryption
+ standards.
+
+Package: libjose-dev
+Architecture: any
+Depends: ${misc:Depends},
+    libjansson-dev,
+    libjose0 (= ${binary:Version}),
+    libssl-dev,
+    zlib1g-dev,
+Section: libdevel
+Multi-Arch: same
+Description: Javascript Object Signing and Encryption (José) - development files
+ This package provides the development files for José, a C-language
+ implementation of the Javascript Object Signing and Encryption
+ standards.

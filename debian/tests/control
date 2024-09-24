@@ -1,0 +1,8 @@
+Tests: run-testsuite
+Depends:
+    @,
+    build-essential,
+    jq,
+    libjansson-dev,
+    libjose-dev,
+    moreutils,

@@ -1,0 +1,29 @@
+Subject: Use asciidoctor to build the manpages
+Author: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+Date: 2021-11-29
+Forwarded: no
+
+--- a/meson.build
++++ b/meson.build
+@@ -38,7 +38,7 @@
+ threads = dependency('threads')
+ jansson = dependency('jansson', version: '>=2.10')
+ libcrypto = dependency('libcrypto', version: '>=1.0.2')
+-a2x = find_program('a2x', required: get_option('docs'))
++asciidoctor = find_program('asciidoctor', required: false)
+ jq = find_program('jq', required: false)
+ 
+ mans = []
+@@ -64,10 +64,10 @@
+   requires: jansson,
+ )
+ 
+-if a2x.found()
++if asciidoctor.found()
+   foreach m : mans
+     custom_target(m.split('/')[-1], input: m + '.adoc', output: m.split('/')[-1],
+-      command: [a2x, '-f', 'manpage', '-D', meson.current_build_dir(), '@INPUT@'],
++      command: [asciidoctor, '--attribute', 'reproducible', '--backend=manpage', '-D', meson.current_build_dir(), '@INPUT@'],
+       install_dir: join_paths(get_option('mandir'), 'man' + m.split('.')[-1]),
+       install: true
+     )
