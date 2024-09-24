@@ -1,0 +1,7 @@
+
+# cherry-picked commits. Keep in upstream's chronological order
+
+# patches for upstream
+
+# patches for Debian
+debian/2021-11-29.use-asciidoctor-to-build-manpages.patch
